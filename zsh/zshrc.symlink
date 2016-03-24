@@ -1,8 +1,14 @@
-# shortcut to this dotfiles path is $ZSH
-export ZSH=$HOME/.dotfiles
+# oh-my-zsh
+export ZSH=/home/ubuntu/.oh-my-zsh
+ZSH_THEME="robbyrussell"
+plugins=(git)
+source $ZSH/oh-my-zsh.sh
+
+# shortcut to this dotfiles path is $DOT
+export DOT=$HOME/.dotfiles
 
 # your project folder that we can `c [tab]` to
-export PROJECTS=~/Code
+#export PROJECTS=~/Code
 
 # Stash your environment variables in ~/.localrc. This means they'll stay out
 # of your main dotfiles repository (which may be public, like this one), but
@@ -14,7 +20,7 @@ fi
 
 # all of our zsh files
 typeset -U config_files
-config_files=($ZSH/**/*.zsh)
+config_files=($DOT/**/*.zsh)
 
 # load the path files
 for file in ${(M)config_files:#*/path.zsh}
@@ -39,3 +45,13 @@ do
 done
 
 unset config_files
+
+# Initial set up .vim
+if [[ ! -d ~/.vim ]]; then
+  mkdir ~/.vim
+  mkdir ~/.vim/bundle
+fi
+if [[ ! -d ~/.vim/bundle ]]; then
+  mkdir ~/.vim/bundle
+fi
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
